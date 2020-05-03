@@ -35,7 +35,7 @@ mel-спектрограмм, построенным по чистым и заш
 
 ### Запуск Докера
 ```
-docker run -v path_to_dataset:/dataset -v path_to_results:/results image_name.
+docker run -v path_to_dataset:/dataset -v path_to_results:/results image_name
 ```
 при этом в папке path_to_dataset изображения должны находится в следующей иерархии:
 ```
