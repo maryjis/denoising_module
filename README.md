@@ -34,12 +34,12 @@ mel-спектрограмм, построенным по чистым и заш
 3. check_results.ipynb
 
 ### Запуск Докера
-docker run -v path_to_dataset:/dataset -v path_to_results:/results image_name.
-
+```docker run -v path_to_dataset:/dataset -v path_to_results:/results image_name.
+```
 при этом в папке path_to_dataset изображения должны находится в следующей иерархии:
 ```
-path_to_dataset/ \n
-user_id1\n
+path_to_dataset/
+   user_id1
         - - - spec_sample_1_1.npy
          - - - spec_sample_1_2.npy
         ....
