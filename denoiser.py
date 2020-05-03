@@ -60,13 +60,13 @@ def combine_frames(results, size):
 
 def load_models(device):
     model_denoiser = UNet(n_classes=1,depth=5, padding=True,batch_norm=True)
-    model_denoiser.load_state_dict(torch.load("data/denoising_autoencoder.pth"))
+    model_denoiser.load_state_dict(torch.load("data/denoising_autoencoder.pth", map_location=torch.device(device)))
     model_denoiser = model_denoiser.to(device)
 
     model_classifier = models.resnet18(pretrained=True)
     num_ftrs = model_classifier.fc.in_features
     model_classifier.fc = torch.nn.Linear(num_ftrs, 1)
-    model_classifier.load_state_dict(torch.load("data/classifier_model.pth"))
+    model_classifier.load_state_dict(torch.load("data/classifier_model.pth", map_location=torch.device(device)))
     model_classifier = model_classifier.to(device)
 
     model_classifier.eval()
@@ -90,7 +90,6 @@ def denoise_data(test_path, result_path, device_name):
     results_data = []
     with torch.no_grad():
         for path in test_loader:
-
             mel = np.load(path[0])
             augmented_mel = augmentation(mel)
             augmented_mel =augmented_mel[np.newaxis, :, :, :].to(device)
@@ -110,7 +109,7 @@ def denoise_data(test_path, result_path, device_name):
                         output_clean_frames.append(output[0, 0, :, :].cpu().detach().numpy())
 
                     output_clean = combine_frames(output_clean_frames, mel.shape[0])
-                    result_packeges = path[0].split("\\")[-2:]
+                    result_packeges = path[0].split("/")[-2:]
 
                     user_package = os.path.join(denoised_path, result_packeges[0])
                     if (not os.path.exists(user_package)):
