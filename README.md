@@ -37,14 +37,15 @@ mel-спектрограмм, построенным по чистым и заш
 docker run -v path_to_dataset:/dataset -v path_to_results:/results image_name.
 
 при этом в папке path_to_dataset изображения должны находится в следующей иерархии:
-
->  path_to_dataset/ \n
->   user_id1\n
->         - - - spec_sample_1_1.npy
->         - - - spec_sample_1_2.npy
->         ....
->   user_id2
->        - - - spec_sample_2_1.npy
->        - - - spec_sample_2_2.npy
->        ....
->  ......  
+```
+path_to_dataset/ \n
+user_id1\n
+        - - - spec_sample_1_1.npy
+         - - - spec_sample_1_2.npy
+        ....
+   user_id2
+       - - - spec_sample_2_1.npy
+       - - - spec_sample_2_2.npy
+       ....
+ ......  
+```
